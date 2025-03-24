@@ -7,10 +7,7 @@ for various maze sizes. The animation captures each drawing step by patching
 the Maze._animate method.
 """
 
-import time
 import os
-import numpy as np
-import imageio
 from PIL import Image, ImageGrab
 from window import Maze, Window  # Import the Maze and Window classes
 
@@ -92,9 +89,16 @@ def generate_gif(num_rows, num_cols, output_filename, seed=None):
     win.close()
     win._Window__root.destroy()
     
-    # Convert captured PIL images to numpy arrays and save as a GIF.
-    np_frames = [np.array(frame.convert('RGB')) for frame in frames]
-    imageio.mimsave(output_filename, np_frames, fps=30)
+    # Save captured frames as an animated GIF using Pillow.
+    duration = int(1000 / 30)  # 30 fps gives ~33ms per frame
+    frames[0].save(
+        output_filename,
+        save_all=True,
+        append_images=frames[1:],
+        optimize=False,
+        duration=duration,
+        loop=0
+    )
     print(f"Saved GIF to {output_filename}")
 
 def main():

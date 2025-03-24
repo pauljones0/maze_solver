@@ -24,9 +24,14 @@ This project visually generates and solves mazes. The demo GIFs below show vario
 
 1. Install the required packages:
    ```
-   pip install pillow imageio numpy
+   pip install pillow
    ```
-2. Run the gif generator:
+2. Run the maze generator and solver:
+   ```
+   python window.py
+   ```
+   This will run a maze, but not save it.
+3. (Optional). Run the gif generator:
    ```
    python generate_gifs.py
    ```
